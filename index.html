@@ -300,55 +300,70 @@
 <!-- End Real world -->
 <hr class="container is-max-desktop separator">
 
-<section class="section hero"></section>
+<section class="section hero">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-full">
+
         <h2 class="title is-3">Real World UAV VLN Deployment</h2>
-      <div class="custom_slider w-slider" data-autoplay="true" data-duration="800">
-        <div class="mask w-slider-mask" id="w-slider-mask-0">
-          <div class="content has-text-justified">
-            <img src="static/images/realworld.png" alt="statistics of our proposed dataset" class="blend-img-background center-image">
-            <p class="new-line"></p>
-            <p>
-              To validate the model's practical utility, the researchers conducted physical flight tests:
-              <br>Cross-Domain Testing: The model was deployed on actual UAV hardware to navigate both outdoor urban environments (similar to the training data) and unseen indoor scenes (testing generalization).
-              <br>System Integration: The deployment involves an onboard processing unit that handles real-time visual processing, local mapping, and obstacle avoidance while executing the VLN agent's high-level commands.
-              <br>Feasibility Results: The tests demonstrated that the model trained on AirNav's real-world aerial data generalizes significantly better to physical hardware than models trained purely on synthetic, "perfect" simulations.
-            </p>
-          </div>
 
-          <div class="slide w-slide" aria-label="1 of 2" role="group">
-            <div class="div-block-2 first_video">
-              <div class="video_class w-embed">
-                <video width="100%" height="auto" autoplay muted controls loop preload="metadata">
-                  <source src="static/videos/outdoors.mp4" type="video/mp4">
-                  Your browser does not support the video tag.
-                </video>
-              </div>
+        <div class="custom_slider">
+
+          <!-- Slider Mask -->
+          <div class="slider-mask" id="slider-mask">
+
+            <!-- Slide 1: Image + Text -->
+            <div class="slide">
+              <img src="static/images/realworld.png"
+                  alt="Real-world UAV deployment"
+                  class="blend-img-background center-image">
+
+              <p class="new-line"></p>
+
+              <p class="has-text-justified">
+                To validate the model's practical utility, we conducted real-world UAV flight tests.
+                The agent was deployed on physical UAV platforms to navigate complex outdoor and indoor environments.
+              </p>
             </div>
-          </div>
 
-          <div class="slide w-slide" aria-label="1 of 2" role="group">
-            <div class="div-block-2">
-              <div class="video_class w-embed">
-                <video width="100%" height="auto" autoplay muted controls loop preload="metadata">
-                  <source src="static/videos/indoors.mp4" type="video/mp4">
-                  Your browser does not support the video tag.
-                </video>
-              </div>
+            <!-- Slide 2: Outdoor Video -->
+            <div class="slide">
+              <video width="100%" height="auto" autoplay muted controls loop preload="metadata">
+                <source src="static/videos/outdoors.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <p class="new-line"></p>
+              <p class="has-text-justified">
+                Outdoor deployment in urban environments with real aerial imagery and GPS-denied navigation.
+              </p>
             </div>
+
+            <!-- Slide 3: Indoor Video -->
+            <div class="slide">
+              <video width="100%" height="auto" autoplay muted controls loop preload="metadata">
+                <source src="static/videos/indoors.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <p class="new-line"></p>
+              <p class="has-text-justified">
+                Indoor deployment to evaluate cross-domain generalization and robustness.
+              </p>
+            </div>
+
           </div>
 
-          
+          <!-- Arrows -->
+          <div class="arrow left-arrow" onclick="previousSlide()">&#9664;</div>
+          <div class="arrow right-arrow" onclick="nextSlide()">&#9654;</div>
+
         </div>
-        <div class="arrow left-arrow" onclick="previousSlide()">&#9664;</div>
-        <div class="arrow right-arrow" onclick="nextSlide()">&#9654;</div>
+
+        <!-- Dots -->
+        <div class="dots-container"></div>
+
       </div>
     </div>
   </div>
-  <div class="dots-container is-max-desktop"></div>
-</div>
 </section>
 
 
