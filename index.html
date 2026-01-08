@@ -97,7 +97,7 @@
           <div class="publication-links">
             <!-- Arxiv PDF link -->
             <span class="link-block">
-              <a href="https://arxiv.org/pdf/2406.14240" target="_blank" class="external-link button is-normal is-rounded is-dark">
+              <a href="http://arxiv.org/abs/2601.03707" target="_blank" class="external-link button is-normal is-rounded is-dark">
                 <span class="icon">
                   <i class="fas fa-file-pdf"></i>
                 </span>
@@ -300,17 +300,68 @@
 <!-- End Real world -->
 <hr class="container is-max-desktop separator">
 
+<section class="section hero"></section>
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full">
+        <h2 class="title is-3">Real World UAV VLN Deployment</h2>
+      <div class="custom_slider w-slider" data-autoplay="true" data-duration="800">
+        <div class="mask w-slider-mask" id="w-slider-mask-0">
+          <div class="content has-text-justified">
+            <img src="static/images/realworld.png" alt="statistics of our proposed dataset" class="blend-img-background center-image">
+            <p class="new-line"></p>
+            <p>
+              To validate the model's practical utility, the researchers conducted physical flight tests:
+              <br>Cross-Domain Testing: The model was deployed on actual UAV hardware to navigate both outdoor urban environments (similar to the training data) and unseen indoor scenes (testing generalization).
+              <br>System Integration: The deployment involves an onboard processing unit that handles real-time visual processing, local mapping, and obstacle avoidance while executing the VLN agent's high-level commands.
+              <br>Feasibility Results: The tests demonstrated that the model trained on AirNav's real-world aerial data generalizes significantly better to physical hardware than models trained purely on synthetic, "perfect" simulations.
+            </p>
+          </div>
+
+          <div class="slide w-slide" aria-label="1 of 2" role="group">
+            <div class="div-block-2 first_video">
+              <div class="video_class w-embed">
+                <video width="100%" height="auto" autoplay muted controls loop preload="metadata">
+                  <source src="static/videos/outdoors.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+          </div>
+
+          <div class="slide w-slide" aria-label="1 of 2" role="group">
+            <div class="div-block-2">
+              <div class="video_class w-embed">
+                <video width="100%" height="auto" autoplay muted controls loop preload="metadata">
+                  <source src="static/videos/indoors.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+          </div>
+
+          
+        </div>
+        <div class="arrow left-arrow" onclick="previousSlide()">&#9664;</div>
+        <div class="arrow right-arrow" onclick="nextSlide()">&#9654;</div>
+      </div>
+    </div>
+  </div>
+  <div class="dots-container is-max-desktop"></div>
+</div>
+</section>
+
 
 <!--BibTex citation -->
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
     <pre><code>
-      @misc{lee2024citynav,
-        title={CityNav: Language-Goal Aerial Navigation Dataset with Geographic Information}, 
+      @misc{cai2026airnav,
+        title={AirNav:A Large-Scale Real-World UAV Vision-and-Language Navigation Dataset with Natural and Diverse Instructions}, 
         author={Hengxing Cai and Yijie Rao and Ligang Huang and Zanyang Zhong and Jinhan Dong and Jingjun Tan and Wenhao Lu and Renxin Zhong},
         year={2026},
-        eprint={2406.14240},
+        eprint={2601.03707},
         archivePrefix={arXiv}
       }
     </code></pre>
