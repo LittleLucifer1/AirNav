@@ -24,7 +24,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-  <title></title>
+  <title>AirNav:A Large-Scale Real-World UAV Vision-and-Language Navigation Dataset with Natural and Diverse Instructions</title>
   <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
   rel="stylesheet">
@@ -304,65 +304,39 @@
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-full">
-
-        <h2 class="title is-3">Real World UAV VLN Deployment</h2>
-
-        <div class="custom_slider">
-
-          <!-- Slider Mask -->
-          <div class="slider-mask" id="slider-mask">
-
-            <!-- Slide 1: Image + Text -->
-            <div class="slide">
-              <img src="static/images/realworld.png"
-                  alt="Real-world UAV deployment"
-                  class="blend-img-background center-image">
-
-              <p class="new-line"></p>
-
-              <p class="has-text-justified">
-                To validate the model's practical utility, we conducted real-world UAV flight tests.
-                The agent was deployed on physical UAV platforms to navigate complex outdoor and indoor environments.
-              </p>
+        <h2 class="title is-3">Aerial Navigation Results</h2>
+        <div class="custom_slider w-slider" data-autoplay="true" data-duration="800">
+          
+          <div class="mask w-slider-mask" id="w-slider-mask-0">
+            
+            <div class="slide w-slide" aria-label="1 of 2" role="group">
+              <div class="div-block-9 first_video">
+                <div class="video_class w-embed">
+                  <video width="100%" height="auto" autoplay muted controls loop preload="metadata">
+                    <source src="static/videos/indoors.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              </div>
             </div>
 
-            <!-- Slide 2: Outdoor Video -->
-            <div class="slide">
-              <video width="100%" height="auto" autoplay muted controls loop preload="metadata">
-                <source src="static/videos/outdoors.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-              <p class="new-line"></p>
-              <p class="has-text-justified">
-                Outdoor deployment in urban environments with real aerial imagery and GPS-denied navigation.
-              </p>
+            <div class="slide w-slide" aria-label="2 of 2" role="group">
+              <div class="div-block-9">
+                <div class="video_class w-embed">
+                  <video width="100%" height="auto" autoplay muted controls loop preload="metadata">
+                    <source src="static/videos/outdoors.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              </div>
             </div>
 
-            <!-- Slide 3: Indoor Video -->
-            <div class="slide">
-              <video width="100%" height="auto" autoplay muted controls loop preload="metadata">
-                <source src="static/videos/indoors.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-              <p class="new-line"></p>
-              <p class="has-text-justified">
-                Indoor deployment to evaluate cross-domain generalization and robustness.
-              </p>
-            </div>
-
-          </div>
-
-          <!-- Arrows -->
-          <div class="arrow left-arrow" onclick="previousSlide()">&#9664;</div>
+          </div> <div class="arrow left-arrow" onclick="previousSlide()">&#9664;</div>
           <div class="arrow right-arrow" onclick="nextSlide()">&#9654;</div>
-
         </div>
-
-        <!-- Dots -->
-        <div class="dots-container"></div>
-
       </div>
     </div>
+    <div class="dots-container is-max-desktop"></div>
   </div>
 </section>
 
@@ -385,63 +359,83 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    var carousels = bulmaCarousel.attach('.carousel1', {
-      autoplay: false, // Disable the automatic page switch
-    });
-  });
-</script>
+    const sliderContainer = document.querySelector('.custom_slider');
+    const sliderMask = sliderContainer.querySelector('.w-slider-mask');
+    const slides = sliderContainer.querySelectorAll('.w-slide');
+    const totalSlides = slides.length;
+    let currentSlide = 0;
+    let autoPlayInterval;
 
-<script>
-  let currentSlide = 0;
-  const slides = document.querySelectorAll('.w-slide');
-  const totalSlides = slides.length; 
-
-  const sliderMask = document.getElementById('w-slider-mask-0'); 
-
-  function nextSlide() {
-    currentSlide = (currentSlide + 1) % totalSlides; 
-    updateSlidePosition();
-  }
-
-  function previousSlide() {
-    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides; 
-    updateSlidePosition();
-  }
-
-  function updateSlidePosition() {
-    const newTransformValue = `translateX(-${currentSlide * 100}%)`;
-    sliderMask.style.transform = newTransformValue; 
-    
-    updateDots();
-  }
-
-  function createDots() {
-    const dotsContainer = document.querySelector('.dots-container');
-    for (let i = 0; i < totalSlides; i++) {
-      const dot = document.createElement('div');
-      dot.classList.add('dot');
-      dot.addEventListener('click', () => {
-        currentSlide = i; 
-        updateSlidePosition();
-      });
-      dotsContainer.appendChild(dot);
+    // 更新位置的核心函数
+    function updateSlidePosition() {
+      // 移动遮罩层，每次移动 -100% * 当前索引
+      const newTransformValue = `translateX(-${currentSlide * 100}%)`;
+      sliderMask.style.transform = newTransformValue;
+      updateDots();
     }
-  }
 
-  function updateDots() {
-    const dots = document.querySelectorAll('.dot');
-    dots.forEach((dot, index) => {
-      dot.classList.toggle('active', index === currentSlide);
-    });
-  }
+    // 下一张
+    window.nextSlide = function() { // 挂载到 window 以便 onclick 调用
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateSlidePosition();
+      resetTimer(); // 用户手动点击后，重置自动播放计时器
+    }
 
+    // 上一张
+    window.previousSlide = function() {
+      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+      updateSlidePosition();
+      resetTimer();
+    }
 
-  createDots();
-  updateDots();
+    // 生成底部小圆点
+    function createDots() {
+      const dotsContainer = document.querySelector('.dots-container');
+      dotsContainer.innerHTML = ''; // 清空原有内容防止重复
+      
+      slides.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.classList.add('dot');
+        if (index === 0) dot.classList.add('active');
+        
+        dot.addEventListener('click', () => {
+          currentSlide = index;
+          updateSlidePosition();
+          resetTimer();
+        });
+        dotsContainer.appendChild(dot);
+      });
+    }
 
-  setInterval(() => {
-    nextSlide();
-  }, 10000); 
+    // 更新圆点状态
+    function updateDots() {
+      const dots = document.querySelectorAll('.dot');
+      dots.forEach((dot, index) => {
+        if (index === currentSlide) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+    }
+
+    // 自动播放控制
+    function startTimer() {
+      autoPlayInterval = setInterval(() => {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateSlidePosition();
+      }, 8000); // 建议设为 8000ms 或更长，给视频留出播放时间
+    }
+
+    function resetTimer() {
+      clearInterval(autoPlayInterval);
+      startTimer();
+    }
+
+    // 初始化
+    createDots();
+    startTimer();
+  });
 </script>
 
 
@@ -482,6 +476,57 @@
     </div>
   </div>
 </footer>
+<style>
+  /* 1. 最外层容器：相当于“相框”，超出范围的内容隐藏 */
+  .custom_slider {
+    position: relative;
+    overflow: hidden; /* 关键：只显示当前范围内的内容 */
+    width: 100%;
+    margin: 0 auto;
+  }
 
+  /* 2. 内部轨道：相当于“胶卷”，它是长长的一条，横向排列所有视频 */
+  .w-slider-mask {
+    display: flex; /* 关键：让内部的 slide 横向排列 */
+    width: 100%;
+    transition: transform 0.5s ease-in-out; /* 关键：实现平滑滚动动画 */
+  }
+
+  /* 3. 单个滑块：每个滑块必须强制占满 100% 的宽度 */
+  .w-slide {
+    min-width: 100%; /* 关键：确保一个屏幕只显示一个视频 */
+    flex-shrink: 0;  /* 防止被压缩 */
+    box-sizing: border-box;
+    padding: 0 10px; /*可选：给视频左右留点缝隙 */
+  }
+
+  /* 4. 左右箭头样式（美化一下，让它浮在视频上面） */
+  .arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5); /* 半透明黑底 */
+    color: white;
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 50%;
+    user-select: none;
+    font-size: 1.5rem;
+    transition: background 0.3s;
+  }
+
+  .arrow:hover {
+    background: rgba(0, 0, 0, 0.8);
+  }
+
+  .left-arrow {
+    left: 10px;
+  }
+
+  .right-arrow {
+    right: 10px;
+  }
+</style>
 </body>
 </html>
